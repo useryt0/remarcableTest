@@ -1,0 +1,31 @@
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# venv
+venv/
+.venv/
+
+# django
+db.sqlite3
+db.sqlite3-journal
+staticfiles/
+media/
+*.log
+
+
+# editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macos
+.DS_Store
+
+# cache
+.pytest_cache/
+.ruff_cache/
+
+.env
