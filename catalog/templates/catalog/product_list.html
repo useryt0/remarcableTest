@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Products</title>
+</head>
+{#  
+    This template displays a list of products with filtering options.
+    It includes a search input for product descriptions, a dropdown for categories,
+    and checkboxes for tags. The filtered products are displayed in a list format.
+    Additionally, counter of results and clear filter link are present.
+#}
+<body>
+    <h1>Products</h1>
+    
+    <form method="get">
+        <input type="text" name="search" value="{{ search }}" placeholder="Search description">
+
+        <select name="category">
+            <option value="">All categories</option>
+            {% for category in all_categories %}
+                <option value="{{ category.id }}" {% if category.id == selected_category %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+
+        <fieldset>
+            <legend>Tags</legend>
+            {% for tag in all_tags %}
+                <label>
+                    <input type="checkbox" name="tags" value="{{ tag.id }}" {% if tag.id in selected_tags %}checked{% endif %}>
+                    {{ tag.name }}
+                </label>
+            {% endfor %}
+        </fieldset>
+
+        <button type="submit">Filter</button>
+        <a href="{% url 'product-list' %}">Clear filters</a>
+    </form> 
+
+    <p>{{ products|length }} product{{ products|length|pluralize }} found</p>
+    <ul>
+        {% for product in products %}
+            <li>
+                <strong>{{ product.name }}</strong> — {{ product.description }}
+                (category: {{ product.category.name }};
+                tags:
+                {% for tag in product.tags.all %}
+                    {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %})
+            </li>
+        {% empty %}
+            <li>No products found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
