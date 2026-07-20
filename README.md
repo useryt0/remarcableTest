@@ -36,7 +36,7 @@ cp .env.example .env
 ```
 docker compose up -d --build 
 ```
-**note:** If you encounter port allocation problems, simply replace both values in line 7 of docker-compose.yml with any valid port number
+**note:** If you encounter port allocation problems, simply replace only the left port value in line 7 of docker-compose.yml with any valid port number
 
 Then open http://localhost:8000/ (or your other port if you changed it)
 
